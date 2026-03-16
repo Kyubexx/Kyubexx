@@ -1,6 +1,6 @@
-# kyubexx.com - Social Links Hub
+# Kyubexx.com - Social Links Hub
 
-This repository hosts the source code for my personal social links website, qwaxkblaxk.com.  It serves as a central hub to easily access all my online profiles and connect with me across different platforms. I mostly made this just so I have a link to slap on my bio.
+This repository hosts the source code for my personal social links website, kyubexx.com.  It serves as a central hub to easily access all my online profiles and connect with me across different platforms. I mostly made this just so I have a link to slap on my bio.
 
 ## About
 
@@ -26,6 +26,7 @@ If you want to run this website locally, follow these steps:
 1.  Clone the repository: `git clone https://github.com/qwaxkblaxk/qwaxkblaxk`
 2.  Open the `index.html` file in your web browser.
 3.  Use notepad to edit the `index.html` file to suit your personal information.
+4.  Use an external image hoster to upload your own photos.
 
 ## Customization
 
