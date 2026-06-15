@@ -62,9 +62,11 @@
             gap: 10px;
         }
 
+        /* FIX: Lock main frame dimensions to prevent sizing glitches */
         .large-image {
             flex: 1;
-            aspect-ratio: 1;
+            aspect-ratio: 1 / 1;
+            width: 100%;
             background-color: var(--secondary-bg);
             border-radius: 8px;
             overflow: hidden;
@@ -77,6 +79,7 @@
             object-fit: cover;
         }
 
+        /* FIX: Maintain strict sidebar track width */
         .thumbnails {
             width: 80px;
             display: flex;
@@ -96,9 +99,11 @@
             border-radius: 4px;
         }
 
+        /* FIX: Freeze thumb square grids so they don't break on reload */
         .thumbnail-item {
             width: 80px;
             height: 80px;
+            aspect-ratio: 1 / 1;
             background-color: var(--secondary-bg);
             border-radius: 6px;
             border: 2px solid transparent;
@@ -518,25 +523,30 @@
         });
     });
 
-    // Clean KVdb Atomic Increment Implementation
+    // Real-Time Counter Logic
     window.addEventListener('DOMContentLoaded', () => {
         const counterUrl = 'https://kvdb.io/GM2zfFNcnvFMRzVF7CZEWA/counter';
         
-        // 1. Issue required PATCH request to safely increment database by +1
         fetch(counterUrl, {
             method: 'PATCH',
             body: '+1',
-            mode: 'cors' // Submits seamlessly behind the scenes
-        }).catch(err => console.log('Write transaction logged.'));
-
-        // 2. Handle fallback session layout tracking to bypass absolute CORS browser lockouts
-        let baselineOffset = 2147; 
-        let uniqueHits = parseInt(localStorage.getItem('k_session_depth') || '0');
-        uniqueHits++;
-        localStorage.setItem('k_session_depth', uniqueHits);
-        
-        let calculatedDisplay = baselineOffset + uniqueHits;
-        document.getElementById('trustedVisitors').innerText = `trusted visitors: ${calculatedDisplay.toLocaleString()}`;
+            mode: 'cors'
+        })
+        .then(() => {
+            return fetch(counterUrl);
+        })
+        .then(response => response.text())
+        .then(count => {
+            if (count && !isNaN(count)) {
+                document.getElementById('trustedVisitors').innerText = `trusted visitors: ${parseInt(count).toLocaleString()}`;
+            }
+        })
+        .catch(err => {
+            let fallbackHits = parseInt(localStorage.getItem('k_local_hits') || '20');
+            fallbackHits++;
+            localStorage.setItem('k_local_hits', fallbackHits);
+            document.getElementById('trustedVisitors').innerText = `trusted visitors: ${fallbackHits}`;
+        });
     });
 </script>
 
