@@ -557,7 +557,11 @@
     });
 
     window.onload = function() {
-        switchProduct('tee');
+        if (window.location.hash === '#shoes') {
+            switchProduct('shoes');
+        } else {
+            switchProduct('tee');
+        }
     };
 </script>
 
