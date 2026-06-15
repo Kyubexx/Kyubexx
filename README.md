@@ -23,7 +23,7 @@ This simple website provides a clean and organized way to find me on various soc
 
 If you want to run this website locally, follow these steps:
 
-1.  Clone the repository: `git clone https://github.com/qwaxkblaxk/qwaxkblaxk`
+1.  Clone the repository: `git clone https://github.com/kyubexx/kyubexx`
 2.  Open the `index.html` file in your web browser.
 3.  Use notepad to edit the `index.html` file to suit your personal information.
 4.  Use an external image hoster to upload your own photos.
